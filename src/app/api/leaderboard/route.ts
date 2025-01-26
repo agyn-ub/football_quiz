@@ -14,6 +14,18 @@ interface User {
   }[]
 }
 
+interface LeaderboardEntry {
+  userId: number
+  username: string | null
+  firstName: string | null
+  lastName: string | null
+  bestScore: number
+  bestCorrectAnswers: number
+  bestTotalQuestions: number
+  gamesPlayed: number
+  lastPlayed: Date | null
+}
+
 export async function GET() {
   try {
     // First get all users with their scores
@@ -41,8 +53,8 @@ export async function GET() {
         gamesPlayed: user.scores.length,
         lastPlayed: user.scores[0]?.createdAt || null
       }))
-      .filter(user => user.bestScore > 0) // Only show users who have played
-      .sort((a, b) => b.bestScore - a.bestScore) // Sort by best score
+      .filter((user: LeaderboardEntry) => user.bestScore > 0) // Only show users who have played
+      .sort((a: LeaderboardEntry, b: LeaderboardEntry) => b.bestScore - a.bestScore) // Sort by best score
       .slice(0, 100) // Top 100 players
 
     return NextResponse.json(leaderboard)
