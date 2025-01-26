@@ -1,6 +1,19 @@
 import { prisma } from '@/lib/prisma'
 import { NextResponse } from 'next/server'
 
+interface User {
+  id: number
+  username: string | null
+  firstName: string | null
+  lastName: string | null
+  scores: {
+    score: number
+    correctAnswers: number
+    totalQuestions: number
+    createdAt: Date
+  }[]
+}
+
 export async function GET() {
   try {
     // First get all users with their scores
@@ -17,7 +30,7 @@ export async function GET() {
 
     // Process users to get their best scores
     const leaderboard = users
-      .map(user => ({
+      .map((user: User) => ({
         userId: user.id,
         username: user.username,
         firstName: user.firstName,
