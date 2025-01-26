@@ -11,6 +11,7 @@ export const metadata: Metadata = {
   description: 'Test your knowledge about Real Madrid',
 }
 
+
 export default function RootLayout({
   children,
 }: {
