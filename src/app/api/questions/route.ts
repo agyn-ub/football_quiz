@@ -1,7 +1,7 @@
 import { prisma } from '@/lib/prisma'
 import { NextResponse } from 'next/server'
 
-const QUESTIONS_PER_GAME = 4
+const QUESTIONS_PER_GAME = 14
 
 export async function GET() {
   try {
